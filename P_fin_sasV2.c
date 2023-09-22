@@ -65,7 +65,7 @@ void ajouter_plusieurs_taches(taches Tab[]) {
         ajouter_tach(Tab);
     }
 }
-/*les fonction de Affichage */
+/*-----------------------------------les fonction de Affichage------------------------------------- */
 void Afficher_plusieurs(taches Tab[]){
     int i;
     for(i=0;i<N;i++){
@@ -77,7 +77,7 @@ void Afficher_plusieurs(taches Tab[]){
         printf("\tStatut:%s\n",Tab[i].status);
     }
 }
-/*fonction de trier est affiche*/
+/*--------------------------------fonction de trier est affiche+-------------------------------------*/
 
 
 void trier_titre(taches Tab[]){
@@ -218,8 +218,7 @@ void modifier_Taches(taches Tab[]){
           }
     }
 }
-
-/*les fonction de recherche*/
+/*-----------------------------------------------les fonction de recherche----------------------------------*/
 void Rechercher_taches_id(taches Tab[]){
     int i,id,test=0;
     printf("Donner identification a chercher:");
@@ -285,7 +284,7 @@ void Supprimer_tache(taches Tab[]){
          }
          N--;
 }
-/*les fonction de Statistique--------------------------------:*/
+/*------------------------------------------les fonction de Statistique--------------------------------:*/
 void Afficher_nombre_taches(){
     int cpt = N;
     printf("-----------------------------------------------------\n");
