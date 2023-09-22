@@ -74,6 +74,7 @@ void Afficher_plusieurs(taches Tab[]){
         printf("\tTitre : %s .\n",Tab[i].titre);
         printf("\tDescription:%s\n",Tab[i].Description);
         printf("\t Dealine  : %d/%d/%d\n",Tab[i].deadline.jour,Tab[i].deadline.mois,Tab[i].deadline.anne);
+        printf("\tStatut:%s\n",Tab[i].status);
     }
 }
 /*fonction de trier est affiche*/
@@ -168,7 +169,7 @@ void trie_menu(taches tab[]){
 
 /*les fonction de modification*/
 void modifier_Taches(taches Tab[]){
-    int nbr,i,choix;
+    int nbr,i,choix,choix_statut;
     printf("Donner le identifient de tache a modifier:");
     scanf("%d",&nbr);
     for(i=0;i<N;i++){
@@ -177,7 +178,6 @@ void modifier_Taches(taches Tab[]){
                 printf("0-Modifier la description de teche:\n");
                 printf("1-Modifier le statut de tache.\n");
                 printf("2-Modifier le deadline de tache.\n");
-                printf("3-Quetter:\n");
                 printf("Saisir le Choix  a modifier :\n");
                 scanf("%d",&choix);
                 switch (choix)
@@ -185,14 +185,32 @@ void modifier_Taches(taches Tab[]){
                 case 0:printf("Entre le nouveau description:");
                        scanf("%s",&Tab[i].Description);
                     break;
-                case 1:printf("Entre le nouveau satut de tache:");
-                       scanf("%s",&Tab[i].status);
+
+                case 1:   
+                            printf("Choisissez le statut de la tache:\n");
+                            printf("1.a realiser\n");
+                            printf("2.En cours de realisation\n");
+                            printf("3.Finalisee\n");
+                            printf("Choix: ");
+                            scanf("%d", &choix_statut);
+                              switch (choix_statut) {
+                              case 1:
+                                     strcpy(Tab[N].status, "arealiser");
+                                        break;
+                               case 2:
+                                      strcpy(Tab[N].status, "En cours de realisation");
+                                          break;
+                                case 3:
+                                      strcpy(Tab[N].status, "Finalise");
+                                           break;
+                                default:
+                                      printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
+                              }
                        break;
                 case 2:printf("Entre le nouveau deadline de tache.");
                        scanf("%d/%d/%d",&Tab[i].deadline.jour,&Tab[i].deadline.mois,&Tab[i].deadline.anne);
-                       break;
-                case 3:printf("Au revoir!");
-                
+                       break; 
+
                 default:
                        printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
                     break;
