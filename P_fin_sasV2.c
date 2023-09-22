@@ -326,8 +326,8 @@ void Statistiques_menu(taches tab[]){
     int choix;
             printf("1-Afficher le nombre total des taches.\n");
             printf("2-Afficher le nombre de taches completes et incompletes.\n");
-            printf("3-Afficher le nombre de jours restants jusqu'au délai de chaque tache.\n");
-            printf("4-Quitter:");
+            printf("3-Afficher le nombre de jours restants jusqu'au delai de chaque tache.\n");
+            printf("4-Quitter:\n");
             printf("Donner votre choix:");
             scanf("%d",&choix);
             switch (choix)
