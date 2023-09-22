@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include <ctype.h>
 #include<time.h>
+#define Max 500
 int N = 0;
 
 typedef struct {
@@ -75,7 +76,7 @@ void Afficher_plusieurs(taches Tab[]){
         printf("\t Dealine  : %d/%d/%d\n",Tab[i].deadline.jour,Tab[i].deadline.mois,Tab[i].deadline.anne);
     }
 }
-/*fonction de trier*/
+/*fonction de trier est affiche*/
 
 
 void trier_titre(taches Tab[]){
@@ -145,10 +146,10 @@ void dead_line(taches Tab[]) {
 }
 void trie_menu(taches tab[]){
      int choix;
-     printf("--------------Menu : Afficher la liste de toutes les tâches --------------------------\n");
-     printf("1-Trier les tâches par ordre alphabetique.\n");
-     printf("2-Trier les tâches par deadline.\n");
-     printf("3-Afficher les tâches dont le deadline est dans 3 jours ou moins.\n");
+     printf("--------------Menu : Afficher la liste de toutes les taches --------------------------\n");
+     printf("1-Trier les taches par ordre alphabetique.\n");
+     printf("2-Trier les taches par deadline.\n");
+     printf("3-Afficher les taches dont le deadline est dans 3 jours ou moins.\n");
      printf("Entre votre Choix: ");
      scanf("%d",&choix);
             switch (choix)
@@ -162,6 +163,7 @@ void trie_menu(taches tab[]){
             default: printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
                 break;
             }
+
 }
 
 /*les fonction de modification*/
@@ -171,12 +173,12 @@ void modifier_Taches(taches Tab[]){
     scanf("%d",&nbr);
     for(i=0;i<N;i++){
           if(Tab[i].identifiant == nbr){
-            do{
+           
                 printf("0-Modifier la description de teche:\n");
                 printf("1-Modifier le statut de tache.\n");
-                printf("2-Modifier le deadline de tâche.\n");
+                printf("2-Modifier le deadline de tache.\n");
                 printf("3-Quetter:\n");
-                printf("Saisir le Choix de Affichage :\n");
+                printf("Saisir le Choix  a modifier :\n");
                 scanf("%d",&choix);
                 switch (choix)
                 {
@@ -195,11 +197,10 @@ void modifier_Taches(taches Tab[]){
                        printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
                     break;
                 }
-
-            }while( choix!=3); 
           }
     }
 }
+
 /*les fonction de recherche*/
 void Rechercher_taches_id(taches Tab[]){
     int i,id,test=0;
@@ -269,7 +270,9 @@ void Supprimer_tache(taches Tab[]){
 /*les fonction de Statistique--------------------------------:*/
 void Afficher_nombre_taches(){
     int cpt = N;
+    printf("-----------------------------------------------------\n");
     printf("le nombre des Tache est %d.\n",cpt);
+    printf("-----------------------------------------------------\n");
 }
 void Affiche_nombre_completes_incompletes(taches tab[]){
     int i,nbr_com=0,nbr_incomp=0; 
@@ -279,8 +282,10 @@ void Affiche_nombre_completes_incompletes(taches tab[]){
       else if(strcmp(tab[i].status,"En cours de realisation") == 0 || strcmp(tab[i].status,"arealiser"))
                nbr_incomp++;
     }  
+     printf("-----------------------------------------------------\n");
      printf("le nombre des tache completes est :%d \n",nbr_com);
      printf("le nombre des tache incompletes est :%d \n",nbr_incomp);
+     printf("-----------------------------------------------------\n");
     
 
 }
@@ -319,10 +324,9 @@ void Afficher_nombre__restants(taches Tab[]) {
 }
 void Statistiques_menu(taches tab[]){
     int choix;
-    
-            printf("1-Afficher le nombre total des tâches.\n");
-            printf("2-Afficher le nombre de tâches complètes et incomplètes.\n");
-            printf("3-Afficher le nombre de jours restants jusqu'au délai de chaque tâche");
+            printf("1-Afficher le nombre total des taches.\n");
+            printf("2-Afficher le nombre de taches completes et incompletes.\n");
+            printf("3-Afficher le nombre de jours restants jusqu'au délai de chaque tache.\n");
             printf("4-Quitter:");
             printf("Donner votre choix:");
             scanf("%d",&choix);
@@ -339,20 +343,19 @@ void Statistiques_menu(taches tab[]){
                        printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
                     break;
             }
-         
-
 }
 
 
+
 int main() {
-    taches tab[150];
+    taches tab[Max];
     int choix;
     do{
-        printf("----------------------Menu : Gestion de Tâches ToDo------------------------------------\n");
+        printf("----------------------Menu : Gestion de Taches ToDo------------------------------------\n");
         printf("\t\t|1-Ajouter une nouvelle tache.\n");
         printf("\t\t|2-Ajouter plusieurs nouvelles taches.\n");
         printf("\t\t|3-Afficher la liste de toutes les taches (Identifiant, Titre, Description, Deadline, Statut).\n");
-        printf("\t\t|4-Modifier une tâche.\n");
+        printf("\t\t|4-Modifier une tache.\n");
         printf("\t\t|5-Supprimer une tache par identifiant.\n");
         printf("\t\t|6-Rechercher les Taches.\n");
         printf("\t\t|7-Statistiques.\n");
@@ -379,15 +382,11 @@ int main() {
         case 8:printf("Au revoir !");
               break;
         default:
-                       printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
+                       printf("Choix invalide. Veuillez choisir parmi les options disponibles!.\n");
                     break;
        
         }
     }while(choix!=8);
-
-  
-   
-
     return 0;
 }
 
