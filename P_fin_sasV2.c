@@ -231,7 +231,7 @@ void Rechercher_taches_id(taches Tab[]){
             }
         }
         if(test == 0)
-             printf("la tache identifient %d il n'est pas existe.\n",id);
+             printf("la tache de  identifient  %d il n'est pas existe.\n",id);
 }
 void Rechercher_taches_titre(taches tab[]){
     char titre;
@@ -251,9 +251,9 @@ void Rechercher_taches_titre(taches tab[]){
 }
 void Rechercher_menu_taches(taches Tab[]){
     int choix;
-            printf("1-Rechercher une tâche par son Identifiant.\n");
-            printf("2-Rechercher une tâche par son Titre.\n");
-            printf("3-Quiter:");
+            printf("1-Rechercher une tache par son Identifiant.\n");
+            printf("2-Rechercher une tache par son Titre.\n");
+            printf("3-Quiter:\n");
             printf("Donner votre choix:");
             scanf("%d",&choix);
             switch (choix)
@@ -402,8 +402,8 @@ int main() {
         default:
                        printf("Choix invalide. Veuillez choisir parmi les options disponibles!.\n");
                     break;
-       
         }
+
     }while(choix!=8);
     return 0;
 }
