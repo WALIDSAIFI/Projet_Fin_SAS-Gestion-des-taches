@@ -41,7 +41,7 @@ void ajouter_tach(taches Tab[]) {
 
         switch (choix_statut) {
             case 1:
-                strcpy(Tab[N].status, "arealiser");
+                strcpy(Tab[N].status, "Arealiser");
                 break;
             case 2:
                 strcpy(Tab[N].status, "En cours de realisation");
@@ -303,21 +303,23 @@ void Afficher_nombre_taches(){
     printf("le nombre des Tache est %d.\n",cpt);
     printf("-----------------------------------------------------\n");
 }
+
+
 void Affiche_nombre_completes_incompletes(taches tab[]){
     int i,nbr_com=0,nbr_incomp=0; 
     for(i=0;i<N;i++){
         if(strcmp(tab[i].status,"Finalise") == 0)
              nbr_com++;
-      else if(strcmp(tab[i].status,"En cours de realisation") == 0 || strcmp(tab[i].status,"arealiser"))
+      else if(strcmp(tab[i].status,"En cours de realisation") == 0 || strcmp(tab[i].status,"Arealiser"))
                nbr_incomp++;
     }  
      printf("-----------------------------------------------------\n");
      printf("le nombre des tache completes est :%d \n",nbr_com);
      printf("le nombre des tache incompletes est :%d \n",nbr_incomp);
      printf("-----------------------------------------------------\n");
-    
-
 }
+
+
 void Afficher_nombre__restants(taches Tab[]) {
     time_t current_time;
     struct tm *time_info;
