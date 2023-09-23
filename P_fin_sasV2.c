@@ -225,7 +225,14 @@ void Rechercher_taches_id(taches Tab[]){
     scanf("%d",&id);
         for(i=0 ; i<N ;i++){
             if(Tab[i].identifiant == id){
-               printf("la tache identifient %d il est existe.\n",id);
+                printf("la tache identifient %d il est existe.\n",id);
+                printf("---------------------------------------------------\n");
+                printf("\tIdentifiant : %d.\n",Tab[i].identifiant);
+                printf("\tTitre : %s .\n",Tab[i].titre);
+                printf("\tDescription:%s\n",Tab[i].Description);
+                printf("\t Dealine  : %d/%d/%d\n",Tab[i].deadline.jour,Tab[i].deadline.mois,Tab[i].deadline.anne);
+                printf("\tStatut:%s\n",Tab[i].status);
+                printf("---------------------------------------------------\n");
                test++;
             }
         }
@@ -240,13 +247,18 @@ void Rechercher_taches_titre(taches tab[]){
         for(i = 0; i<N ;i++){
             if(strcmp(tab[i].titre,&titre) == 0){
                 printf("la tache de titre %s il est existe.\n",tab[i].titre);
-                  t++;
+                printf("---------------------------------------------------\n");
+                printf("\tIdentifiant : %d.\n",tab[i].identifiant);
+                printf("\tTitre : %s .\n",tab[i].titre);
+                printf("\tDescription:%s\n",tab[i].Description);
+                printf("\t Dealine  : %d/%d/%d\n",tab[i].deadline.jour,tab[i].deadline.mois,tab[i].deadline.anne);
+                printf("\tStatut:%s\n",tab[i].status);
+                printf("---------------------------------------------------\n");
+                t++;
             }
             if(t == 0)
-            printf("la tache de titre %s il n'est pas existe.\n",titre);
-                
+            printf("la tache de titre %s il n'est pas existe.\n",titre);   
         }
-
 }
 void Rechercher_menu_taches(taches Tab[]){
     int choix;
