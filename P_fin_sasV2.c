@@ -195,13 +195,13 @@ void modifier_Taches(taches Tab[]){
                             scanf("%d", &choix_statut);
                               switch (choix_statut) {
                               case 1:
-                                     strcpy(Tab[N].status, "arealiser");
+                                     strcpy(Tab[i].status, "arealiser");
                                         break;
                                case 2:
-                                      strcpy(Tab[N].status, "En cours de realisation");
+                                      strcpy(Tab[i].status, "En cours de realisation");
                                           break;
                                 case 3:
-                                      strcpy(Tab[N].status, "Finalise");
+                                      strcpy(Tab[i].status, "Finalise");
                                            break;
                                 default:
                                       printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
@@ -296,7 +296,7 @@ void Supprimer_tache(taches Tab[]){
          }
          N--;
 }
-/*------------------------------------------les fonction de Statistique--------------------------------:*/
+/*------------------------------------------les fonction de Statistique-----------------------------------:*/
 void Afficher_nombre_taches(){
     int cpt = N;
     printf("-----------------------------------------------------\n");
