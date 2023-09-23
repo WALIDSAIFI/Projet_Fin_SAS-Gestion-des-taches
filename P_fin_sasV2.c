@@ -247,13 +247,13 @@ void Rechercher_taches_titre(taches tab[]){
         for(i = 0; i<N ;i++){
             if(strcmp(tab[i].titre,&titre) == 0){
                 printf("la tache de titre %s il est existe.\n",tab[i].titre);
-                printf("---------------------------------------------------\n");
+                printf("------------------------------------------------------\n");
                 printf("\tIdentifiant : %d.\n",tab[i].identifiant);
                 printf("\tTitre : %s .\n",tab[i].titre);
                 printf("\tDescription:%s\n",tab[i].Description);
                 printf("\t Dealine  : %d/%d/%d\n",tab[i].deadline.jour,tab[i].deadline.mois,tab[i].deadline.anne);
                 printf("\tStatut:%s\n",tab[i].status);
-                printf("---------------------------------------------------\n");
+                printf("-----------------------------------------------------\n");
                 t++;
             }
             if(t == 0)
@@ -380,7 +380,7 @@ int main() {
     taches tab[Max];
     int choix;
     do{
-        printf("----------------------Menu : Gestion de Taches ToDo------------------------------------\n");
+        printf("--------------------------------Menu : Gestion de Taches ToDo------------------------------------\n");
         printf("\t\t|1-Ajouter une nouvelle tache.\n");
         printf("\t\t|2-Ajouter plusieurs nouvelles taches.\n");
         printf("\t\t|3-Afficher la liste de toutes les taches (Identifiant, Titre, Description, Deadline, Statut).\n");
