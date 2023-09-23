@@ -5,6 +5,7 @@
 #include<time.h>
 #define Max 500
 int N = 0;
+int x=1;
 
 typedef struct {
     int jour;
@@ -22,7 +23,8 @@ typedef struct {
 
 
 void ajouter_tach(taches Tab[]) {
-   Tab[N].identifiant = N + 1;
+    
+    Tab[N].identifiant = x++;
     printf("%d\n", Tab[N].identifiant);
     printf("Entrez le titre de la tache: ");
     scanf("%s", Tab[N].titre);
@@ -39,7 +41,7 @@ void ajouter_tach(taches Tab[]) {
         printf("Choix: ");
         scanf("%d", &choix_statut);
 
-        switch (choix_statut) {
+        switch (choix_statut) { 
             case 1:
                 strcpy(Tab[N].status, "Arealiser");
                 break;
@@ -420,4 +422,3 @@ int main() {
     }while(choix!=8);
     return 0;
 }
-
