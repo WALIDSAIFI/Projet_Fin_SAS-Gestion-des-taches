@@ -25,10 +25,10 @@ date date_actuelle(){
     date Date;
 	
     time_t secondes = time(NULL);
-    struct tm temps_actuel = *localtime(&secondes);
-    Date.anne = temps_actuel.tm_year + 1900;
-    Date.mois = temps_actuel.tm_mon + 1;
-    Date.jour = temps_actuel.tm_mday; 
+    struct tm Date_actuel = *localtime(&secondes);
+    Date.anne = Date_actuel.tm_year + 1900;
+    Date.mois = Date_actuel.tm_mon + 1;
+    Date.jour = Date_actuel.tm_mday; 
     return Date;
 }
 
@@ -43,7 +43,7 @@ void ajouter_tach(taches Tab[]) {
     printf("Entrez la deadline JJ/MM/AAAA: ");
     scanf("%d/%d/%d", &Tab[N].deadline.jour, &Tab[N].deadline.mois, &Tab[N].deadline.anne);
     while((Tab[N].deadline.jour>=31 ||Tab[N].deadline.jour<0) || (Tab[N].deadline.mois>=12 ||Tab[N].deadline.mois<0)){
-    	printf("**Entre un data valide SVP!! JJ/MM/AAAA :");
+    	printf("**Entre un date valide SVP!! JJ/MM/AAAA :");
     	scanf("%d/%d/%d", &Tab[N].deadline.jour, &Tab[N].deadline.mois, &Tab[N].deadline.anne);
 	}
     int choix_statut;
@@ -153,7 +153,7 @@ void date_limite(taches Tab[]) {
     	if(delai_jour[i] == 0){
             printf("-----------------------------------------------------------\n");
             printf("| ID : %d    |  Titre : %s  | Date limite : Aujourd'hui\n", Tab[i].identifiant, Tab[i].titre);
-               }else if(delai_jour[i]<=3 ){
+               }else if(delai_jour[i]<=3 && delai_jour[i] > 0){
             	printf("-----------------------------------------------------------\n");
                  printf("| ID : %d    |  Titre : %s  | Date limite : dans %d jours\n", Tab[i].identifiant, Tab[i].titre, delai_jour[i]);
 		 }
