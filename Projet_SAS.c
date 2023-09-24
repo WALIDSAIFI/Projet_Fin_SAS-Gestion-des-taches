@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include<stdlib.h>
+#include <ctype.h>
 #include<time.h>
 #define Max 500
 int N = 0;
