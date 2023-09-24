@@ -1,0 +1,26 @@
+Exemple 1 :
+
+    Tâche : Développer une application web
+    Description : Concevoir et développer une application web pour un client.
+     e
+
+Exemple 2 :
+
+    Tâche : Résoudre un bug critique dans le code
+    Description :  identifier le bug critique qui provoque des plantages del'application et apporter des corrections.
+
+Exemple 3 :
+
+    Tâche : Mettre à jour le système d'exploitation
+    Description : Mettre à jour le système d'exploitation de tous les ordinateurs de l'entreprise.
+     
+
+Exemple 4 :
+
+    Tâche : Créer une base de données pour le projet X
+    Description : Concevoir et implémenter une base de données relationnelle.
+
+Exemple 5 :
+
+    Tâche : Configurer un serveur de production
+    Description : Configurer un serveur de production pour héberger l'application web.
