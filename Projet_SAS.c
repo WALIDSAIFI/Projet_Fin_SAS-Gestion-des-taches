@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include<stdlib.h>
-#include <ctype.h>
 #include<time.h>
 #define Max 500
 int N = 0;
@@ -17,7 +16,7 @@ typedef struct {
     int   identifiant;
     date dateC;
     char  titre[50];
-    char  Description[900];
+    char  Description[950];
     date  deadline;
     char  status[50];
 } taches;
@@ -37,7 +36,7 @@ void ajouter_tach(taches Tab[]) {
     Tab[N].identifiant=id++;
     printf("%d\n", Tab[N].identifiant);
     printf("Entrez le titre de la tache: ");
-    scanf("%s", Tab[N].titre);
+    scanf(" %[^\n]s", Tab[N].titre);
     printf("Description de la tache: ");
     scanf(" %[^\n]s", Tab[N].Description);
     printf("Entrez la deadline JJ/MM/AAAA: ");
@@ -370,15 +369,15 @@ int main() {
     int choix;
     do{
         printf("----------------------Menu : Gestion de Taches ToDo------------------------------------\n");
-        printf("\t\t|1-Ajouter une nouvelle tache.\n");
-        printf("\t\t|2-Ajouter plusieurs nouvelles taches.\n");
-        printf("\t\t|3-Afficher la liste de toutes les taches (Identifiant, Titre, Description, Deadline, Statut).\n");
-        printf("\t\t|4-Modifier une tache.\n");
-        printf("\t\t|5-Supprimer une tache par identifiant.\n");
-        printf("\t\t|6-Rechercher les Taches.\n");
-        printf("\t\t|7-Statistiques.\n");
-        printf("\t\t|8-Quitter.\n");
-        printf("\t\t|Entre votre choix:");
+        printf("\t|1-Ajouter une nouvelle tache.\n");
+        printf("\t|2-Ajouter plusieurs nouvelles taches.\n");
+        printf("\t|3-Afficher la liste de toutes les taches (Identifiant, Titre, Description, Deadline, Statut).\n");
+        printf("\t|4-Modifier une tache.\n");
+        printf("\t|5-Supprimer une tache par identifiant.\n");
+        printf("\t|6-Rechercher les Taches.\n");
+        printf("\t|7-Statistiques.\n");
+        printf("\t|8-Quitter.\n");
+        printf("\t|Entre votre choix:");
         scanf("%d",&choix);
 
         switch (choix){
@@ -397,7 +396,7 @@ int main() {
                break;
         case 7:Statistiques_menu(tab);
               break;
-        case 8:printf("Au revoir !");
+        case 8:printf("\tAu revoir !");
               break;
         default:
                        printf("Choix invalide. Veuillez choisir parmi les options disponibles!.\n");
