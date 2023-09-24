@@ -5,7 +5,8 @@
 #include<time.h>
 #define Max 500
 int N = 0;
-int x=1;
+
+int id=1;
 
 typedef struct {
     int jour;
@@ -15,23 +16,37 @@ typedef struct {
 
 typedef struct {
     int   identifiant;
+    date dateC;
     char  titre[50];
     char  Description[900];
     date  deadline;
     char  status[50];
 } taches;
-
+date date_actuelle(){
+    date Date;
+	
+    time_t secondes = time(NULL);
+    struct tm temps_actuel = *localtime(&secondes);
+    Date.anne = temps_actuel.tm_year + 1900;
+    Date.mois = temps_actuel.tm_mon + 1;
+    Date.jour = temps_actuel.tm_mday; 
+    return Date;
+}
 
 void ajouter_tach(taches Tab[]) {
-    
-    Tab[N].identifiant = x++;
+    Tab[N].dateC = date_actuelle(); 
+    Tab[N].identifiant=id++;
     printf("%d\n", Tab[N].identifiant);
     printf("Entrez le titre de la tache: ");
     scanf("%s", Tab[N].titre);
     printf("Description de la tache: ");
-     scanf(" %[^\n]s", Tab[N].Description);
+    scanf(" %[^\n]s", Tab[N].Description);
     printf("Entrez la deadline JJ/MM/AAAA: ");
     scanf("%d/%d/%d", &Tab[N].deadline.jour, &Tab[N].deadline.mois, &Tab[N].deadline.anne);
+    while((Tab[N].deadline.jour>=31 ||Tab[N].deadline.jour<0)&&(Tab[N].deadline.mois>=12 ||Tab[N].deadline.mois<0)){
+    	printf("**Entre un data valide SVP!!:");
+    	scanf("%d/%d/%d", &Tab[N].deadline.jour, &Tab[N].deadline.mois, &Tab[N].deadline.anne);
+	}
     int choix_statut;
     do {
         printf("Choisissez le statut de la tache:\n");
@@ -41,9 +56,9 @@ void ajouter_tach(taches Tab[]) {
         printf("Choix: ");
         scanf("%d", &choix_statut);
 
-        switch (choix_statut) { 
+        switch (choix_statut) {
             case 1:
-                strcpy(Tab[N].status, "Arealiser");
+                strcpy(Tab[N].status, "arealiser");
                 break;
             case 2:
                 strcpy(Tab[N].status, "En cours de realisation");
@@ -73,6 +88,7 @@ void Afficher_plusieurs(taches Tab[]){
     for(i=0;i<N;i++){
         printf("\n--------------------------------------------------\n");
         printf("\tIdentifiant : %d.\n",Tab[i].identifiant);
+        printf("\tla date de creation JJ/MM/AAAA:%d/%d/%d\n",Tab[i].dateC.jour,Tab[i].dateC.mois,Tab[i].dateC.anne);
         printf("\tTitre : %s .\n",Tab[i].titre);
         printf("\tDescription:%s\n",Tab[i].Description);
         printf("\t Dealine  : %d/%d/%d\n",Tab[i].deadline.jour,Tab[i].deadline.mois,Tab[i].deadline.anne);
@@ -123,29 +139,26 @@ void tri_date(taches tab[]){
      }
      Afficher_plusieurs(tab);
 }
-void dead_line(taches Tab[]) {
+void date_limite(taches Tab[]) {
     int i;
     int delai_jour[N];
     int jours;
- 
-    time_t seconds = time(NULL);
-    struct tm current_time = *localtime(&seconds);
-    int currentYear = current_time.tm_year + 1900;
-    int currentMonth = current_time.tm_mon + 1;
-    int currentDay = current_time.tm_mday;
-
+     date d_actuel;
+     d_actuel = date_actuelle();
     for (i = 0; i < N; i++) {
-        jours = (Tab[i].deadline.anne - currentYear) * 365 + (Tab[i].deadline.mois - currentMonth) * 30 + (Tab[i].deadline.jour - currentDay);
+        jours = (Tab[i].deadline.anne - d_actuel .anne) * 365 + (Tab[i].deadline.mois - d_actuel.mois) * 30 + (Tab[i].deadline.jour - d_actuel.jour);
         delai_jour[i] = jours;  
     }
   
     for (i = 0; i < N; i++) {
-        if (Tab[i].identifiant == 0) {
-            printf("ID : %d | Titre : %s | Deadline : Aujourd'hui\n", Tab[i].identifiant, Tab[i].titre);
-        } else if (Tab[i].identifiant <= 3) {
-            printf("ID : %d | Titre : %s | Deadline : dans %d jours\n", Tab[i].identifiant, Tab[i].titre, delai_jour[i]);
-        }
-    }
+    	if(delai_jour[i] == 0){
+            printf("-----------------------------------------------------------\n");
+            printf("| ID : %d    |  Titre : %s  | Date limite : Aujourd'hui\n", Tab[i].identifiant, Tab[i].titre);
+               }else if(delai_jour[i]<=3 ){
+            	printf("-----------------------------------------------------------\n");
+                 printf("| ID : %d    |  Titre : %s  | Date limite : dans %d jours\n", Tab[i].identifiant, Tab[i].titre, delai_jour[i]);
+		 }
+     }
 }
 void trie_menu(taches tab[]){
      int choix;
@@ -161,7 +174,7 @@ void trie_menu(taches tab[]){
                 break;
             case 2:tri_date(tab);
                  break;
-            case 3: dead_line(tab);
+            case 3: date_limite(tab);
                 break;
             default: printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
                 break;
@@ -197,13 +210,13 @@ void modifier_Taches(taches Tab[]){
                             scanf("%d", &choix_statut);
                               switch (choix_statut) {
                               case 1:
-                                     strcpy(Tab[i].status, "arealiser");
+                                     strcpy(Tab[N].status, "arealiser");
                                         break;
                                case 2:
-                                      strcpy(Tab[i].status, "En cours de realisation");
+                                      strcpy(Tab[N].status, "En cours de realisation");
                                           break;
                                 case 3:
-                                      strcpy(Tab[i].status, "Finalise");
+                                      strcpy(Tab[N].status, "Finalise");
                                            break;
                                 default:
                                       printf("Choix invalide. Veuillez choisir parmi les options disponibles.\n");
@@ -227,14 +240,7 @@ void Rechercher_taches_id(taches Tab[]){
     scanf("%d",&id);
         for(i=0 ; i<N ;i++){
             if(Tab[i].identifiant == id){
-                printf("la tache identifient %d il est existe.\n",id);
-                printf("---------------------------------------------------\n");
-                printf("\tIdentifiant : %d.\n",Tab[i].identifiant);
-                printf("\tTitre : %s .\n",Tab[i].titre);
-                printf("\tDescription:%s\n",Tab[i].Description);
-                printf("\t Dealine  : %d/%d/%d\n",Tab[i].deadline.jour,Tab[i].deadline.mois,Tab[i].deadline.anne);
-                printf("\tStatut:%s\n",Tab[i].status);
-                printf("---------------------------------------------------\n");
+               printf("la tache identifient %d il est existe.\n",id);
                test++;
             }
         }
@@ -249,18 +255,13 @@ void Rechercher_taches_titre(taches tab[]){
         for(i = 0; i<N ;i++){
             if(strcmp(tab[i].titre,&titre) == 0){
                 printf("la tache de titre %s il est existe.\n",tab[i].titre);
-                printf("------------------------------------------------------\n");
-                printf("\tIdentifiant : %d.\n",tab[i].identifiant);
-                printf("\tTitre : %s .\n",tab[i].titre);
-                printf("\tDescription:%s\n",tab[i].Description);
-                printf("\t Dealine  : %d/%d/%d\n",tab[i].deadline.jour,tab[i].deadline.mois,tab[i].deadline.anne);
-                printf("\tStatut:%s\n",tab[i].status);
-                printf("-----------------------------------------------------\n");
-                t++;
+                  t++;
             }
             if(t == 0)
-            printf("la tache de titre %s il n'est pas existe.\n",titre);   
+            printf("la tache de titre %s il n'est pas existe.\n",titre);
+                
         }
+
 }
 void Rechercher_menu_taches(taches Tab[]){
     int choix;
@@ -298,60 +299,45 @@ void Supprimer_tache(taches Tab[]){
          }
          N--;
 }
-/*------------------------------------------les fonction de Statistique-----------------------------------:*/
+/*------------------------------------------les fonction de Statistique--------------------------------:*/
 void Afficher_nombre_taches(){
     int cpt = N;
     printf("-----------------------------------------------------\n");
     printf("le nombre des Tache est %d.\n",cpt);
     printf("-----------------------------------------------------\n");
 }
-
-
 void Affiche_nombre_completes_incompletes(taches tab[]){
+	
     int i,nbr_com=0,nbr_incomp=0; 
     for(i=0;i<N;i++){
         if(strcmp(tab[i].status,"Finalise") == 0)
              nbr_com++;
-      else if(strcmp(tab[i].status,"En cours de realisation") == 0 || strcmp(tab[i].status,"Arealiser"))
+      else if(strcmp(tab[i].status,"En cours de realisation") == 0 || strcmp(tab[i].status,"arealiser"))
                nbr_incomp++;
     }  
      printf("-----------------------------------------------------\n");
      printf("le nombre des tache completes est :%d \n",nbr_com);
      printf("le nombre des tache incompletes est :%d \n",nbr_incomp);
      printf("-----------------------------------------------------\n");
+    
+
 }
 
+void Afficher_nombre_restants(taches Tab[]) {
+    int i;
+    date dateActuelle = date_actuelle();
 
-void Afficher_nombre__restants(taches Tab[]) {
-    time_t current_time;
-    struct tm *time_info;
-    time(&current_time);
-    time_info = localtime(&current_time);
-    int france_time_offset = 1; 
-    time_info->tm_hour += france_time_offset;
+    for (i = 0; i < N; i++) {
+        int jours = (Tab[i].deadline.anne - dateActuelle.anne) * 365 +  (Tab[i].deadline.mois - dateActuelle.mois) * 30 + (Tab[i].deadline.jour - dateActuelle.jour);
 
-    if (time_info->tm_hour >= 24) {
-        time_info->tm_hour -= 24;
-        time_info->tm_mday++;
-    } else if (time_info->tm_hour < 0) {
-        time_info->tm_hour += 24;
-        time_info->tm_mday--;
-    }
-    int currentYear = time_info->tm_year + 1900;
-    int currentMonth = time_info->tm_mon + 1;
-    int currentDay = time_info->tm_mday;
+        printf("ID : %d | Titre : %s |", Tab[i].identifiant, Tab[i].titre);
 
-    for (int i = 0; i < N; i++) {
-        int jours = (Tab[i].deadline.anne - currentYear) * 365 + (Tab[i].deadline.mois - currentMonth) * 30 + (Tab[i].deadline.jour - currentDay);
-        
-        if (Tab[i].identifiant == 0) {
-            printf("ID : %d | Titre : %s | Deadline : Aujourd'hui\n", Tab[i].identifiant, Tab[i].titre);
+        if (jours < 0) {
+            printf(" Deadline : en retard de %d jours\n", -jours);
         } else if (jours == 0) {
-            printf("ID : %d | Titre : %s | Deadline : Aujourd'hui\n", Tab[i].identifiant, Tab[i].titre);
-        } else if (jours > 0) {
-            printf("ID : %d | Titre : %s | Deadline : dans %d jours\n", Tab[i].identifiant, Tab[i].titre, jours);
+            printf(" Deadline : Aujourd'hui\n");
         } else {
-            printf("ID : %d | Titre : %s | Deadline : en retard de %d jours\n", Tab[i].identifiant, Tab[i].titre, -jours);
+            printf(" il reste  :  %d jours\n", jours);
         }
     }
 }
@@ -369,7 +355,7 @@ void Statistiques_menu(taches tab[]){
                 break;
             case 2:Affiche_nombre_completes_incompletes(tab);
                 break;
-            case 3: printf("Afficher le nombre de jours restants jusqu'au délai de chaque tâche");
+            case 3: Afficher_nombre_restants(tab);
                  break;
             
             default:
@@ -384,7 +370,7 @@ int main() {
     taches tab[Max];
     int choix;
     do{
-        printf("--------------------------------Menu : Gestion de Taches ToDo------------------------------------\n");
+        printf("----------------------Menu : Gestion de Taches ToDo------------------------------------\n");
         printf("\t\t|1-Ajouter une nouvelle tache.\n");
         printf("\t\t|2-Ajouter plusieurs nouvelles taches.\n");
         printf("\t\t|3-Afficher la liste de toutes les taches (Identifiant, Titre, Description, Deadline, Statut).\n");
@@ -420,5 +406,10 @@ int main() {
         }
 
     }while(choix!=8);
-    return 0;
+
+return 0;
+
 }
+
+
+
