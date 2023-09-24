@@ -5,7 +5,6 @@
 #include<time.h>
 #define Max 500
 int N = 0;
-
 int id=1;
 
 typedef struct {
@@ -43,8 +42,8 @@ void ajouter_tach(taches Tab[]) {
     scanf(" %[^\n]s", Tab[N].Description);
     printf("Entrez la deadline JJ/MM/AAAA: ");
     scanf("%d/%d/%d", &Tab[N].deadline.jour, &Tab[N].deadline.mois, &Tab[N].deadline.anne);
-    while((Tab[N].deadline.jour>=31 ||Tab[N].deadline.jour<0)&&(Tab[N].deadline.mois>=12 ||Tab[N].deadline.mois<0)){
-    	printf("**Entre un data valide SVP!!:");
+    while((Tab[N].deadline.jour>=31 ||Tab[N].deadline.jour<0) || (Tab[N].deadline.mois>=12 ||Tab[N].deadline.mois<0)){
+    	printf("**Entre un data valide SVP!! JJ/MM/AAAA :");
     	scanf("%d/%d/%d", &Tab[N].deadline.jour, &Tab[N].deadline.mois, &Tab[N].deadline.anne);
 	}
     int choix_statut;
@@ -410,5 +409,6 @@ int main() {
 return 0;
 
 }
+
 
 
